@@ -20,7 +20,7 @@ class PrescriptionSeeder extends Seeder
             Prescription::factory()
                 ->for($patient)
                 ->for(Doctor::all()->random())
-                ->hasAttached(Medicine::all()->random(), ['indications' => 'tomese una culero'])
+                ->hasAttached(Medicine::all()->random(), ['indications' => fake()->sentence()])
                 ->create();
         });
     }
