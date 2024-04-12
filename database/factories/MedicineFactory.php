@@ -20,9 +20,7 @@ class MedicineFactory extends Factory
         return [
             'name' => fake()->domainName(),
             'quantity' =>fake()->numberBetween(1,100),
-            'presentation'=> $this->faker->randomElement([Medicine::pCapsule,
-                                                          Medicine::pPill,
-                                                          Medicine::pSyrup]),
+            'presentation'=> fake()->randomElement(['capsule', 'pill', 'syrup']),
             'description' =>fake()->sentence()
             //
         ];

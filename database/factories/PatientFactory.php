@@ -23,10 +23,7 @@ class PatientFactory extends Factory
         'birth_date' => fake()->date(),
         'affiliation_date' => fake()->date(),
         'phone_number' => fake()->phoneNumber(),
-        'blood_type'=> $this->faker->randomElement([Patient::bloodA, Patient::bloodAN,
-                                                    Patient::bloodB, Patient::bloodBN,
-                                                    Patient::bloodAB, Patient::bloodABN,
-                                                    Patient::bloodO, Patient::bloodON])
+        'blood_type'=> fake()->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
             //
         ];
     }

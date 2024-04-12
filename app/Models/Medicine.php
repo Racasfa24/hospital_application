@@ -14,7 +14,4 @@ class Medicine extends Model
         'presentation',
         'description',
     ];
-    public const pCapsule = 'capsule';
-    public const pPill = 'pill';
-    public const pSyrup = 'syrup';
 }

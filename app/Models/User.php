@@ -25,9 +25,6 @@ class User extends Authenticatable
         'phone_number',
         'role'
     ];
-    
-    public const ROLE_ADMINISTRATOR = 'administrator';
-    public const ROLE_RECEPTIONIST = 'receptionist';
 
     /**
      * The attributes that should be hidden for serialization.
