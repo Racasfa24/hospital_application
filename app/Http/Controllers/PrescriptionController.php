@@ -19,8 +19,18 @@ class PrescriptionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    { 
+        $validated = $request->validate([
+
+            'patient_id' => 'required|exists:patients,id',
+            'doctor_id' => 'required|exists:doctors,id',
+            'medicine_id' =>  'requires|exists:medicine,id',
+            'quantity' => 'required|numeric|min:1',
+            'frequency' => 'required|string',
+            'duration' => 'required|string',
+            'notes' => 'required|string',
+
+        ]);
     }
 
     /**

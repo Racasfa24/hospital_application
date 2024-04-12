@@ -20,7 +20,15 @@ class MedicalRecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+
+            'patient_id' => 'required|exists:patients,id',
+            'doctor_id' => 'required|exists:doctors,id',
+            'datetime' => 'required|date_format:Y-m-d'
+
+        ]);
+
+        return MedicalRecord::create($validated);
     }
 
     /**
@@ -34,16 +42,31 @@ class MedicalRecordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, MedicalRecord $medicalRecord)
     {
-        //
+        $validated = $request->validate([
+
+            'patient_id' => 'required|exists:patients,id',
+            'doctor_id' => 'required|exists:doctors,id',
+            'datetime' => 'required|date_format:Y-m-d'
+
+        ]);
+
+        $medicalRecord -> update($validated);
+
+        return $medicalRecord;
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MedicalRecord $medicalRecord)
     {
-        //
+        
+        $medicalRecord->delete();
+
+        return response() -> noContent();
+
     }
 }
