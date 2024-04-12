@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< Updated upstream
+
         // Administrators
         User::factory()->administrator()->create([
             'email' => 'admin@admin.com',
@@ -40,15 +40,10 @@ class DatabaseSeeder extends Seeder
 
         // Medicines
         Medicine::factory()->count(10)->create();
-=======
-        User::factory()->times(10)->create();
-        Patient::factory()->times(10)->create();
-        Medicine::factory()->times(10)->create();
 
         /*
         TODO
         Finalizar de llenar los registros de todas las tablas
         */
->>>>>>> Stashed changes
     }
 }
