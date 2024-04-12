@@ -15,4 +15,9 @@ class Medicine extends Model
         'presentation',
         'description',
     ];
+
+    public function prescriptions()
+    {
+        return $this->belongsToMany(Prescription::class)->withPivot('indications');
+    }
 }

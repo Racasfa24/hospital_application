@@ -17,4 +17,9 @@ class Patient extends Model
         'phone_number',
         'blood_type',
     ];
+
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class);
+    }
 }

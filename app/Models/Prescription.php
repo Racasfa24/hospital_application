@@ -8,4 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Prescription extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'patient_id',
+        'doctor_id',
+        'medicine_id',
+        'quantity',
+        'frequency',
+        'duration',
+        'notes',
+    ];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+
+    public function medicines()
+    {
+        return $this->belongsToMany(Medicine::class)->withPivot('indications');
+    }
 }
