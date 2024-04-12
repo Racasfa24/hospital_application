@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('quantity');
+            $table->integer('quantity');
             $table->enum('presentation', ['capsule', 'pill', 'syrup']);
             $table->text('description');
             $table->timestamps();
