@@ -22,4 +22,14 @@ class Doctor extends Model
     {
         return $this->hasMany(Prescription::class);
     }
+
+    public function medicalCertificates()
+    {
+        return $this->hasMany(MedicalCertificate::class);
+    }
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
 }
