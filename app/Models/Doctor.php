@@ -12,10 +12,11 @@ class Doctor extends Model
     protected $fillable = [
         'name',
         'lastname',
-        'birth_date',
-        'affiliation_date',
+        'speciality',
+        'admission_date',
+        'professional_id',
         'phone_number',
-        'specialty',
+        'email',
     ];
 
     public function prescriptions()

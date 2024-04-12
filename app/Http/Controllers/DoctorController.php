@@ -20,7 +20,17 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'speciality' => 'required|string',
+            'admission_date' => 'required|date_format:Y-m-d,before:tomorrow',
+            'professional_id' => 'required|string|unique:doctors,professional_id',
+            'phone_number' => 'required|string',
+            'email' => 'required|email|unique:doctors,email',
+        ]);
+
+        return Doctor::create($validated);
     }
 
     /**
@@ -34,16 +44,30 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Doctor $doctor)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'speciality' => 'required|string',
+            'admission_date' => 'required|date_format:Y-m-d,before:tomorrow',
+            'professional_id' => 'required|string|unique:doctors,professional_id,' . $doctor->id,
+            'phone_number' => 'required|string',
+            'email' => 'required|email|unique:doctors,email,' . $doctor->id,
+        ]);
+
+        $doctor->update($validated);
+
+        return $doctor;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+
+        return response()->noContent();
     }
 }
