@@ -21,7 +21,6 @@ class MedicineFactory extends Factory
             'quantity' => fake()->numberBetween(1, 100),
             'presentation' => fake()->randomElement(['capsule', 'pill', 'syrup']),
             'description' => fake()->sentence(),
-            //
         ];
     }
 }
