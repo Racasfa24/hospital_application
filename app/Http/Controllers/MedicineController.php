@@ -21,14 +21,35 @@ class MedicineController extends Controller
     public function store(Request $request)
     {
         //
+        $inputs = $request->input();
+        $m = Medicine::create($inputs);
+        return response()->json([
+            'data'=>$m,
+            'mensaje'=>"Medicamento registrado correctamente"
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Medicine $medicine)
+    public function show(string $id)
     {
-        return $medicine;
+        $m = Medicine::find($id);
+        if(isset($m)){
+
+            return response()->json([
+                'data'=>$m,
+                'mensaje'=>"Medicamento encontrado"
+            ]);
+
+        }else{
+
+            return response()->json([
+                'error'=>true,
+                'mensaje'=>"Medicamento inexistente"
+            ]);
+
+        }
     }
 
     /**
@@ -37,6 +58,33 @@ class MedicineController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $m = Medicine::find($id);
+        if(isset($m)){
+
+            $m->name = $request -> name;
+            $m->quantity = $request -> quantity;
+            $m->presentation = $request -> presentation;
+            $m->description = $request -> description;
+            if( $m-> save()){
+                return response()->json([
+                    'data'=>$m,
+                    'mensaje'=>"Info. del medicamento actualizada."
+                ]);
+            }else{
+                return response()->json([
+                    'error'=>true,
+                    'mensaje'=>"No se actualizó correctamente"
+                ]);
+            }
+
+        }else{
+
+            return response()->json([
+                'error'=>true,
+                'mensaje'=>"No existe el medicamento"
+            ]);
+
+        }
     }
 
     /**
@@ -45,5 +93,25 @@ class MedicineController extends Controller
     public function destroy(string $id)
     {
         //
+        $m = Medicine::find($id);
+        if(isset($m)){
+            $res=Medicine::destroy($id);
+            if($res){
+
+                return response()->json([
+                    'data'=>[],
+                    'mensaje'=>"Medicamento eliminado"
+                ]);
+
+            }
+
+        }else{
+
+            return response()->json([
+                'error'=>true,
+                'mensaje'=>"Medicamento inexistente"
+            ]);
+
+        }
     }
 }

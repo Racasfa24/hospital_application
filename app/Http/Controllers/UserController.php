@@ -20,7 +20,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->input();
+        return $inputs;
     }
 
     /**
