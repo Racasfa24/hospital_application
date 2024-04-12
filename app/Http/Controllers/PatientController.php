@@ -20,7 +20,17 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'birth_date' => 'required|date_format:Y-m-d,before:affiliation_date',
+            'affiliation_date' => 'required|date_format:Y-m-d,after:birth_date',
+            'phone_number' => 'required|string|unique:patients,phone_number',
+            'blood_type' => 'required|string|in: A+,A-,B+,B-,AB+,AB-,O+,O-',
+        ]);
+
+        return Patient::create($validated);
+        
     }
 
     /**
@@ -34,16 +44,31 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Patient $patient)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'birth_date' => 'required|date_format:Y-m-d,before:affiliation_date',
+            'affiliation_date' => 'required|date_format:Y-m-d,after:birth_date',
+            'phone_number' => 'required|string|unique:patients,phone_number' . $patient->id,
+            'blood_type' => 'required|string|in: A+,A-,B+,B-,AB+,AB-,O+,O-',
+        ]);
+
+        $patient->update($validated);
+
+        return $patient;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( Patient $patient)
     {
-        //
+
+        $patient -> delete();
+
+        return response() -> noContent();
+        
     }
 }
