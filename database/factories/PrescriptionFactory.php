@@ -17,10 +17,7 @@ class PrescriptionFactory extends Factory
     public function definition(): array
     {
         return [
-
-            
             'date' => fake()->date(),
-            //
         ];
     }
 }

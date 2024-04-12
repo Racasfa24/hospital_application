@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Medicine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +18,9 @@ class MedicineFactory extends Factory
     {
         return [
             'name' => fake()->domainName(),
-            'quantity' =>fake()->numberBetween(1,100),
-            'presentation'=> fake()->randomElement(['capsule', 'pill', 'syrup']),
-            'description' =>fake()->sentence()
+            'quantity' => fake()->numberBetween(1, 100),
+            'presentation' => fake()->randomElement(['capsule', 'pill', 'syrup']),
+            'description' => fake()->sentence(),
             //
         ];
     }
