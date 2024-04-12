@@ -34,7 +34,7 @@ class UserFactory extends Factory
 
     public function administrator(): Factory
     {
-        return $this->state(function (array $attributesd) {
+        return $this->state(function (array $attributes) {
             return [
                 'role' => 'administrator',
             ];
@@ -43,7 +43,7 @@ class UserFactory extends Factory
 
     public function receptionist(): Factory
     {
-        return $this->state(function (array $attributesd) {
+        return $this->state(function (array $attributes) {
             return [
                 'role' => 'receptionist',
             ];
