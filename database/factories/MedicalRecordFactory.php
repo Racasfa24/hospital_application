@@ -17,6 +17,8 @@ class MedicalRecordFactory extends Factory
     public function definition(): array
     {
         return [
+            
+        'datetime' => fake()->dateTime(),
             //
         ];
     }

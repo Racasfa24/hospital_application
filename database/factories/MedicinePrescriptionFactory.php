@@ -17,7 +17,7 @@ class MedicinePrescriptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'indications' => fake()->sentences(),
         ];
     }
 }

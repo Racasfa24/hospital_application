@@ -17,6 +17,7 @@ class DoctorFactory extends Factory
     public function definition(): array
     {
         return [
+<<<<<<< Updated upstream
             'name' => fake()->name(),
             'lastname' => fake()->lastName(),
             'speciality' => fake()->randomElement(['cardiology', 'orthopedics', 'oncology', 'neurology', 'pediatrics']),
@@ -24,6 +25,10 @@ class DoctorFactory extends Factory
             'professional_id' => fake()->uuid(),
             'phone_number' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
+=======
+
+            
+>>>>>>> Stashed changes
         ];
     }
 }
