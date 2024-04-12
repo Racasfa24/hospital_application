@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prescription;
 use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
@@ -11,7 +12,7 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        //
+        return Prescription::all();
     }
 
     /**
@@ -25,9 +26,9 @@ class PrescriptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Prescription $prescription)
     {
-        //
+        return $prescription;
     }
 
     /**

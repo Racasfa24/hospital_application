@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Doctor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class DoctorController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Doctor::all();
+        return User::all();
     }
 
     /**
@@ -26,15 +26,15 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Doctor $doctor)
+    public function show(User $user)
     {
-        return $doctor;
+        return $user;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -42,7 +42,7 @@ class DoctorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
     }

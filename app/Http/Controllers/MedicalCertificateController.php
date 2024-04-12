@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalCertificate;
 use Illuminate\Http\Request;
 
 class MedicalCertificateController extends Controller
@@ -11,7 +12,7 @@ class MedicalCertificateController extends Controller
      */
     public function index()
     {
-        //
+        return MedicalCertificate::all();
     }
 
     /**
@@ -25,9 +26,9 @@ class MedicalCertificateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MedicalCertificate $medicalCertificate)
     {
-        //
+        return $medicalCertificate;
     }
 
     /**

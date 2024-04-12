@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 
 class MedicineController extends Controller
@@ -11,7 +12,7 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        //
+        return Medicine::all();
     }
 
     /**
@@ -25,9 +26,9 @@ class MedicineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Medicine $medicine)
     {
-        //
+        return $medicine;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalRecord;
 use Illuminate\Http\Request;
 
 class MedicalRecordController extends Controller
@@ -11,7 +12,7 @@ class MedicalRecordController extends Controller
      */
     public function index()
     {
-        //
+        return MedicalRecord::all();
     }
 
     /**
@@ -25,9 +26,9 @@ class MedicalRecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MedicalRecord $medicalRecord)
     {
-        //
+        return $medicalRecord;
     }
 
     /**
