@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,8 +22,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request->input();
-        return $inputs;
+        $validated = $request->validate([
+
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string',
+            'phone_number' => 'required|string|unique:users,phone_number',
+            'role' => 'required|string|in: administrator,recepcionist' ,
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']);
+
+        return User::create($validated);
     }
 
     /**
@@ -37,7 +50,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+
+            'name' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
+            'email' => 'required|email|unique:users,email' .$user ->id,
+            'password' => 'required|string',
+            'phone_number' => 'required|string|unique:users,phone_number' .$user ->id,
+            'role' => 'required|string|in: administrator,recepcionist' ,
+        ]);
+
+        $user->update($validated);
+
+        return $user;
+
     }
 
     /**
@@ -45,6 +71,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response() -> noContent();
+        
     }
 }
