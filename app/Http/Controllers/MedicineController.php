@@ -20,98 +20,48 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $inputs = $request->input();
-        $m = Medicine::create($inputs);
-        return response()->json([
-            'data'=>$m,
-            'mensaje'=>"Medicamento registrado correctamente"
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'quantity' => 'required|numeric',
+            'presentation' => 'required|string',
+            'description' => 'required|string',
         ]);
+
+        return Medicine::create($validated);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Medicine $medicine)
     {
-        $m = Medicine::find($id);
-        if(isset($m)){
-
-            return response()->json([
-                'data'=>$m,
-                'mensaje'=>"Medicamento encontrado"
-            ]);
-
-        }else{
-
-            return response()->json([
-                'error'=>true,
-                'mensaje'=>"Medicamento inexistente"
-            ]);
-
-        }
+        return $medicine;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Medicine $medicine)
     {
         //
-        $m = Medicine::find($id);
-        if(isset($m)){
-
-            $m->name = $request -> name;
-            $m->quantity = $request -> quantity;
-            $m->presentation = $request -> presentation;
-            $m->description = $request -> description;
-            if( $m-> save()){
-                return response()->json([
-                    'data'=>$m,
-                    'mensaje'=>"Info. del medicamento actualizada."
-                ]);
-            }else{
-                return response()->json([
-                    'error'=>true,
-                    'mensaje'=>"No se actualizó correctamente"
-                ]);
-            }
-
-        }else{
-
-            return response()->json([
-                'error'=>true,
-                'mensaje'=>"No existe el medicamento"
-            ]);
-
-        }
+        $validated = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'quantity' => 'required|numeric',
+            'presentation' => 'required|string',
+            'description' => 'required|string',
+        ]);
+        $medicine->update($validated);
+        return $medicine;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Medicine $medicine)
     {
         //
-        $m = Medicine::find($id);
-        if(isset($m)){
-            $res=Medicine::destroy($id);
-            if($res){
-
-                return response()->json([
-                    'data'=>[],
-                    'mensaje'=>"Medicamento eliminado"
-                ]);
-
-            }
-
-        }else{
-
-            return response()->json([
-                'error'=>true,
-                'mensaje'=>"Medicamento inexistente"
-            ]);
-
-        }
+        $medicine->delete();
+        
+        return response()->noContent();
     }
 }
