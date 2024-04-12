@@ -31,4 +31,22 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['administrator', 'receptionist']),
         ];
     }
+
+    public function administrator(): Factory
+    {
+        return $this->state(function (array $attributesd) {
+            return [
+                'role' => 'administrator',
+            ];
+        });
+    }
+
+    public function receptionist(): Factory
+    {
+        return $this->state(function (array $attributesd) {
+            return [
+                'role' => 'receptionist',
+            ];
+        });
+    }
 }
