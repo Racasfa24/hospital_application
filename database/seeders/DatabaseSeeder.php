@@ -8,6 +8,7 @@ use App\Models\Doctor;
 use App\Models\Medicine;
 use App\Models\Patient;
 use App\Models\User;
+use App\Models\Prescription;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -41,9 +42,14 @@ class DatabaseSeeder extends Seeder
         // Medicines
         Medicine::factory()->count(10)->create();
 
-        /*
-        TODO
-        Finalizar de llenar los registros de todas las tablas
-        */
+        // Prescriptions
+        $patients = Patient::all();
+        $patients->each(function (Patient $patient) {
+            Prescription::factory()
+                ->for($patient)
+                ->for(Doctor::all()->random())
+                ->hasAttached(Medicine::all()->random(), ['indications' => 'tomese una culero'])
+                ->create();
+        });
     }
 }
