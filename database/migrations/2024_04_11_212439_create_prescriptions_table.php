@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Doctor;
+use App\Models\Medicine;
 use App\Models\Patient;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Patient::class);
             $table->foreignIdFor(Doctor::class);
+            $table->foreignIdFor(Medicine::class);
             $table->date('date');
+            $table->integer('quantity');
+            $table->enum('frequency',['Once a day', 'Twice a day', 'Every 8 hours']);
+            $table->enum('duration',['1 week', '2 weeks', '1 month']);
+            $table->string('notes');
             $table->timestamps();
         });
     }
