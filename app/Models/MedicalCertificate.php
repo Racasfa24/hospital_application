@@ -16,7 +16,7 @@ class MedicalCertificate extends Model
         'weight',
         'systolic_pressure',
         'diastolic_pressure',
-        'hearth_rate',
+        'heart_rate',
         'respiratory_rate',
     ];
 
