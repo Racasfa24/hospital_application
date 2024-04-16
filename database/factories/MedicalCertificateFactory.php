@@ -23,7 +23,7 @@ class MedicalCertificateFactory extends Factory
             'weight' => fake()->randomFloat(2, 50, 120),
             'systolic_pressure' => fake()->numberBetween(50, 120),
             'diastolic_pressure' => fake()->numberBetween(60, 80),
-            'hearth_rate' => fake()->numberBetween(60, 120),
+            'heart_rate' => fake()->numberBetween(60, 120),
             'respiratory_rate' => fake()->numberBetween(12, 18),
         ];
     }
