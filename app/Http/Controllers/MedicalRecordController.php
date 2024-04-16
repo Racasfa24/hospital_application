@@ -21,11 +21,9 @@ class MedicalRecordController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-
-            'patient_id' => 'required|exists:patients,id',
             'doctor_id' => 'required|exists:doctors,id',
-            'datetime' => 'required|date_format:Y-m-d'
-
+            'patient_id' => 'required|exists:patients,id',
+            'datetime' => 'required|date_format:Y-m-d H:i'
         ]);
 
         return MedicalRecord::create($validated);
@@ -45,17 +43,14 @@ class MedicalRecordController extends Controller
     public function update(Request $request, MedicalRecord $medicalRecord)
     {
         $validated = $request->validate([
-
-            'patient_id' => 'required|exists:patients,id',
             'doctor_id' => 'required|exists:doctors,id',
-            'datetime' => 'required|date_format:Y-m-d'
-
+            'patient_id' => 'required|exists:patients,id',
+            'datetime' => 'required|date_format:Y-m-d H:i'
         ]);
 
-        $medicalRecord -> update($validated);
+        $medicalRecord->update($validated);
 
         return $medicalRecord;
-
     }
 
     /**
@@ -63,10 +58,8 @@ class MedicalRecordController extends Controller
      */
     public function destroy(MedicalRecord $medicalRecord)
     {
-        
         $medicalRecord->delete();
 
-        return response() -> noContent();
-
+        return response()->noContent();
     }
 }
