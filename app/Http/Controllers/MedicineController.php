@@ -43,14 +43,15 @@ class MedicineController extends Controller
      */
     public function update(Request $request, Medicine $medicine)
     {
-
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
             'quantity' => 'required|numeric',
             'presentation' => 'required|string',
             'description' => 'required|string',
         ]);
-        $medicine -> update($validated);
+
+        $medicine->update($validated);
+
         return $medicine;
     }
 
@@ -59,7 +60,7 @@ class MedicineController extends Controller
      */
     public function destroy(Medicine $medicine)
     {
-        $medicine -> delete();
+        $medicine->delete();
 
         return response()->noContent();
     }
