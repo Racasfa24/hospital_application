@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('weight', 5, 2);
             $table->unsignedSmallInteger('systolic_pressure');
             $table->unsignedSmallInteger('diastolic_pressure');
-            $table->unsignedSmallInteger('hearth_rate');
+            $table->unsignedSmallInteger('heart_rate');
             $table->unsignedSmallInteger('respiratory_rate');
             $table->timestamps();
         });
