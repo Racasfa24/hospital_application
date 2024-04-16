@@ -18,6 +18,8 @@ class MedicalCertificate extends Model
         'diastolic_pressure',
         'heart_rate',
         'respiratory_rate',
+        'doctor_id',
+        'patient_id',
     ];
 
     public function patient()
