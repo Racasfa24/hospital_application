@@ -29,8 +29,8 @@ class MedicalCertificateController extends Controller
             'diastolic_pressure' => 'required|integer|min:1',
             'heart_rate' => 'required|integer|min:1',
             'respiratory_rate' => 'required|integer|min:1',
-            'patient_id' => 'required|exists:patients,id',
             'doctor_id' => 'required|exists:doctors,id',
+            'patient_id' => 'required|exists:patients,id',
         ]);
     
         return MedicalCertificate::create($validated);
@@ -47,7 +47,7 @@ class MedicalCertificateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MedicalCertificate $medicalC)
+    public function update(Request $request, MedicalCertificate $medicalCertificate)
     {
         $validated = $request->validate([
             'date' => 'required|date_format:Y-m-d',
@@ -58,24 +58,22 @@ class MedicalCertificateController extends Controller
             'diastolic_pressure' => 'required|integer|min:1',
             'heart_rate' => 'required|integer|min:1',
             'respiratory_rate' => 'required|integer|min:1',
-            'patient_id' => 'required|exists:patients,id',
             'doctor_id' => 'required|exists:doctors,id',
+            'patient_id' => 'required|exists:patients,id',
         ]);
 
-        $medicalC->update($validated);
+        $medicalCertificate->update($validated);
 
-        return $medicalC;
-
+        return $medicalCertificate;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MedicalCertificate $medicalC)
+    public function destroy(MedicalCertificate $medicalCertificate)
     {
-        $medicalC->delete();
+        $medicalCertificate->delete();
 
         return response()->noContent();
-
     }
 }
