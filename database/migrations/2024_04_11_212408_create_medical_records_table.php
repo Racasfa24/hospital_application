@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Patient::class);
-            $table->foreignIdFor(Doctor::class);
             $table->datetime('datetime');
+            $table->foreignIdFor(Doctor::class);
+            $table->foreignIdFor(Patient::class);
             $table->timestamps();
         });
     }
