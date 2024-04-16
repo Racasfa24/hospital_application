@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('medical_certificates', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Patient::class);
-            $table->foreignIdFor(Doctor::class);
             $table->date('date');
             $table->unsignedTinyInteger('age');
             $table->decimal('height', 5, 2);
@@ -25,6 +23,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('diastolic_pressure');
             $table->unsignedSmallInteger('heart_rate');
             $table->unsignedSmallInteger('respiratory_rate');
+            $table->foreignIdFor(Doctor::class);
+            $table->foreignIdFor(Patient::class);
             $table->timestamps();
         });
     }
