@@ -38,6 +38,14 @@ class UserTest extends TestCase
             'phone_number' => '123456789',
             'role' => 'receptionist',
         ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'john.doe@gmail.com',
+            'phone_number' => '123456789',
+            'role' => 'receptionist',
+        ]);
     }
 
     public function test_user_can_be_retrieved_by_id()
@@ -65,6 +73,14 @@ class UserTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson([
+            'name' => 'john',
+            'lastname' => 'Doe',
+            'email' => 'john.doe@gmail.com',
+            'phone_number' => '123456789',
+            'role' => 'receptionist',
+        ]);
+
+        $this->assertDatabaseHas('users', [
             'name' => 'john',
             'lastname' => 'Doe',
             'email' => 'john.doe@gmail.com',
