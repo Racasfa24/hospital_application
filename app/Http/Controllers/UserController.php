@@ -23,13 +23,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-
             'name' => 'required|string|min:2|max:255',
             'lastname' => 'required|string|min:2|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string',
             'phone_number' => 'required|string|unique:users,phone_number',
-            'role' => 'required|string|in: administrator,recepcionist' ,
+            'role' => 'required|string|in:administrator,receptionist' ,
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -51,19 +50,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
-
             'name' => 'required|string|min:2|max:255',
             'lastname' => 'required|string|min:2|max:255',
-            'email' => 'required|email|unique:users,email' .$user ->id,
+            'email' => 'required|email|unique:users,email,' .$user ->id,
             'password' => 'required|string',
-            'phone_number' => 'required|string|unique:users,phone_number' .$user ->id,
-            'role' => 'required|string|in: administrator,recepcionist' ,
+            'phone_number' => 'required|string|unique:users,phone_number,' .$user ->id,
+            'role' => 'required|string|in:administrator,receptionist' ,
         ]);
 
         $user->update($validated);
 
         return $user;
-
     }
 
     /**
@@ -73,7 +70,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return response() -> noContent();
-        
+        return response()->noContent();
     }
 }
