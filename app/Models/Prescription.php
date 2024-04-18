@@ -10,28 +10,30 @@ class Prescription extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patient_id',
-        'doctor_id',
-        'medicine_id',
-        'quantity',
-        'frequency',
-        'duration',
-        'date',
+        'medical_record_id',
         'notes',
+        'date',
     ];
 
-    public function patient()
+    public function medicalRecord()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(MedicalRecord::class);
     }
 
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->medicalRecord()->doctor();
+    }
+
+    public function patient()
+    {
+        return $this->medicalRecord()->patient();
     }
 
     public function medicines()
     {
-        return $this->belongsToMany(Medicine::class, 'indications');
+        return $this->belongsToMany(Medicine::class)
+            ->withTimestamps()
+            ->withPivot('indications');
     }
 }

@@ -17,11 +17,8 @@ class PrescriptionFactory extends Factory
     public function definition(): array
     { 
         return [
-        'date' => fake()->date(),
-        'quantity' => fake()->numberBetween(1, 10),
-        'frequency' => fake()->randomElement(['Once a day', 'Twice a day', 'Every 8 hours']),
-        'duration' => fake()->randomElement(['1 week', '2 weeks', '1 month']),
-        'notes' => fake()->text(),
+            'date' => fake()->date(),
+            'notes' => fake()->sentence(),
         ];
     }
 }

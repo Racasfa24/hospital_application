@@ -6,6 +6,7 @@ use App\Models\Patient;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\MedicalRecord;
 
 return new class extends Migration
 {
@@ -16,14 +17,9 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Patient::class);
-            $table->foreignIdFor(Doctor::class);
-            $table->foreignIdFor(Medicine::class);
             $table->date('date');
-            $table->integer('quantity');
-            $table->enum('frequency',['Once a day', 'Twice a day', 'Every 8 hours']);
-            $table->enum('duration',['1 week', '2 weeks', '1 month']);
             $table->string('notes');
+            $table->foreignIdFor(MedicalRecord::class);
             $table->timestamps();
         });
     }
