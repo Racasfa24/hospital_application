@@ -21,16 +21,31 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     { 
         $validated = $request->validate([
-
-            'patient_id' => 'required|exists:patients,id',
-            'doctor_id' => 'required|exists:doctors,id',
-            'medicine_id' =>  'requires|exists:medicine,id',
-            'quantity' => 'required|numeric|min:1',
-            'frequency' => 'required|string',
-            'duration' => 'required|string',
+            'medical_record_id' => 'required',
             'notes' => 'required|string',
-
+            'date' => 'required|date_format:Y-m-d',
+            'medicines' => 'required|array',
+            'medicines.*.medicine_id' => 'required|exists:medicines,id',
+            'medicines.*.indications' => 'required|string',
         ]);
+
+        $prescription = Prescription::create([
+            'medical_record_id' => $validated['medical_record_id'],
+            'notes' => $validated['notes'],
+            'date' => $validated['date'],
+        ]);
+
+        $medicines = collect($validated['medicines'])->mapWithKeys(function ($medicine) {
+            return [ 
+                $medicine['medicine_id'] => ['indications' => $medicine['indications']]
+            ];
+        });
+
+        $prescription->medicines()->attach($medicines);
+
+        $prescription->load('medicines');
+
+        return $prescription;
     }
 
     /**
@@ -38,22 +53,51 @@ class PrescriptionController extends Controller
      */
     public function show(Prescription $prescription)
     {
-        return $prescription;
+        return $prescription->load('medicines');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Prescription $prescription)
     {
-        //
+        $validated = $request->validate([
+            'medical_record_id' => 'required',
+            'notes' => 'required|string',
+            'date' => 'required|date_format:Y-m-d',
+            'medicines' => 'required|array',
+            'medicines.*.medicine_id' => 'required|exists:medicines,id',
+            'medicines.*.indications' => 'required|string',
+        ]);
+
+        $prescription->update([
+            'medical_record_id' => $validated['medical_record_id'],
+            'notes' => $validated['notes'],
+            'date' => $validated['date'],
+        ]);
+
+        $prescription->medicines()->detach();
+
+        $medicines = collect($validated['medicines'])->mapWithKeys(function ($medicine) {
+            return [ 
+                $medicine['medicine_id'] => ['indications' => $medicine['indications']]
+            ];
+        });
+
+        $prescription->medicines()->attach($medicines);
+
+        $prescription->load('medicines');
+
+        return $prescription;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Prescription $prescription)
     {
-        //
+        $prescription->delete();
+
+        return response()->noContent();
     }
 }
