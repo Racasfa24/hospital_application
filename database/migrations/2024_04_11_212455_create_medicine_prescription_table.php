@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('medicine_prescription', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Medicine::class);
-            $table->foreignIdFor(Prescription::class);
+            $table->foreignIdFor(Medicine::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Prescription::class)->constrained()->cascadeOnDelete();
             $table->string('indications');
             $table->timestamps();
         });
