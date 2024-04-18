@@ -22,7 +22,6 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'quantity' => 'required|numeric',
             'presentation' => 'required|string',
             'description' => 'required|string',
         ]);
@@ -45,7 +44,6 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'quantity' => 'required|numeric',
             'presentation' => 'required|string',
             'description' => 'required|string',
         ]);

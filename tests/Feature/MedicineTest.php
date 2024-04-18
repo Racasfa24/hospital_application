@@ -22,7 +22,6 @@ class MedicineTest extends TestCase
     {
         $response = $this->post('/api/medicines', [
             'name' => 'Medicine 1',
-            'quantity' => 10,
             'presentation' => 'pill',
             'description' => 'This is a medicine'
         ]);
@@ -31,14 +30,12 @@ class MedicineTest extends TestCase
 
         $response->assertJson([
             'name' => 'Medicine 1',
-            'quantity' => 10,
             'presentation' => 'pill',
             'description' => 'This is a medicine'
         ]);
 
         $this->assertDatabaseHas('medicines', [
             'name' => 'Medicine 1',
-            'quantity' => 10,
             'presentation' => 'pill',
             'description' => 'This is a medicine'
         ]);
@@ -61,7 +58,6 @@ class MedicineTest extends TestCase
 
         $response = $this->put("/api/medicines/{$medicine->id}", [
             'name' => 'Medicine 2',
-            'quantity' => 20,
             'presentation' => 'capsule',
             'description' => 'This is another medicine'
         ]);
@@ -70,14 +66,12 @@ class MedicineTest extends TestCase
 
         $response->assertJson([
             'name' => 'Medicine 2',
-            'quantity' => 20,
             'presentation' => 'capsule',
             'description' => 'This is another medicine'
         ]);
 
         $this->assertDatabaseHas('medicines', [
             'name' => 'Medicine 2',
-            'quantity' => 20,
             'presentation' => 'capsule',
             'description' => 'This is another medicine'
         ]);
