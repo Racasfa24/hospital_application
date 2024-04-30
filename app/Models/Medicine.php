@@ -11,7 +11,16 @@ class Medicine extends Model
 
     protected $fillable = [
         'name',
+        'active_ingredients',
+        'dosage_strength',
+        'dosage_unit',
+        'prescription_details',
         'presentation',
+        'price',
+        'quantity_in_stock',
+        'supplier_name',
+        'supplier_contact',
+        'supplier_cost',
         'description',
     ];
 

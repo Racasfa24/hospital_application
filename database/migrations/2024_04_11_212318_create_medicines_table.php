@@ -14,8 +14,17 @@ return new class extends Migration
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('presentation', ['capsule', 'pill', 'syrup']);
-            $table->text('description');
+            $table->string('active_ingredients');
+            $table->string('dosage_strength');
+            $table->string('dosage_unit');
+            $table->string('prescription_info');
+            $table->enum('presentation', ['Cápsula', 'Tableta', 'Jarabe']);
+            $table->decimal('price', 6, 2);
+            $table->unsignedInteger('quantity_in_stock');
+            $table->string('supplier_name');
+            $table->string('supplier_contact');
+            $table->decimal('supplier_cost', 6, 2);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

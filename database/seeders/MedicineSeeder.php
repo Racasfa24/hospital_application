@@ -12,6 +12,11 @@ class MedicineSeeder extends Seeder
      */
     public function run(): void
     {
-        Medicine::factory()->count(20)->create();
+        $jsonData = file_get_contents(base_path('/database/data/medicines.json'));
+        $medicines = json_decode($jsonData, true);
+
+        foreach($medicines as $medicineData) {
+            Medicine::create($medicineData);
+        }
     }
 }
