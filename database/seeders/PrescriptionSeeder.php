@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use App\Models\Medicine;
 use App\Models\Patient;
 use App\Models\Prescription;
+use App\Models\MedicalRecord;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -19,13 +20,19 @@ Run the database seeds. **/
         $patients->each(function (Patient $patient) use ($doctors, $medicines, $faker) {
             $doctor = $doctors->random();
 
-            $medicine = $medicines->random();
+            $patient = Patient::factory()->create();
 
-            Prescription::factory()
-                ->for($patient)
+            $medicalRecord = MedicalRecord::factory()
                 ->for($doctor)
+                ->for($patient)
+                ->create();
+
+            $medicine = $medicines->random();
+            
+            Prescription::factory()
+                ->for($medicalRecord)
                 ->create([
-                    'medicine_id' => $medicine->id
+                   
                 ]);
         });
     }

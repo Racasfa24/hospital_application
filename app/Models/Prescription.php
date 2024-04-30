@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Prescription extends Model
 {
@@ -22,12 +23,12 @@ class Prescription extends Model
 
     public function doctor()
     {
-        return $this->medicalRecord()->doctor();
+        return $this->hasOneThrough(Doctor::class, MedicalRecord::class);
     }
 
     public function patient()
     {
-        return $this->medicalRecord()->patient();
+        return $this->hasOneThrough(Patient::class, MedicalRecord::class);
     }
 
     public function medicines()
