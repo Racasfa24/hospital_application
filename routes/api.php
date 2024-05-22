@@ -32,3 +32,4 @@ Route::apiResource('medicines', MedicineController::class);
 Route::apiResource('medical-records', MedicalRecordController::class);
 Route::apiResource('prescriptions', PrescriptionController::class);
 Route::apiResource('medical-certificates', MedicalCertificateController::class);
+Route::get('medical-certificates/{medical_certificate}/generate-pdf', [MedicalCertificateController::class, 'generatePdf']);

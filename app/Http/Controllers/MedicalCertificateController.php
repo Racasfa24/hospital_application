@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MedicalCertificate;
 use Illuminate\Http\Request;
+use function Spatie\LaravelPdf\Support\pdf;
 
 class MedicalCertificateController extends Controller
 {
@@ -32,7 +33,7 @@ class MedicalCertificateController extends Controller
             'doctor_id' => 'required|exists:doctors,id',
             'patient_id' => 'required|exists:patients,id',
         ]);
-    
+
         return MedicalCertificate::create($validated);
     }
 
@@ -75,5 +76,16 @@ class MedicalCertificateController extends Controller
         $medicalCertificate->delete();
 
         return response()->noContent();
+    }
+
+    /**
+     * Generate a PDF for the specified resource.
+     */
+    public function generatePdf(MedicalCertificate $medicalCertificate)
+    {
+        // Generate a PDF for the medicine
+        return pdf()
+            ->view('pdf.invoice', ['medicalCertificate' => $medicalCertificate])
+            ->name('invoice-2023-04-10.pdf');
     }
 }
