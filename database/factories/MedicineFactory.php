@@ -16,9 +16,8 @@ class MedicineFactory extends Factory
      */
     public function definition(): array
     {
-        $supplierCost = fake()->randomFloat(2, 4, 20); 
+        $supplierCost = fake()->randomFloat(2, 4, 20);
         $profit = 1.4;
-
         $numberOfIngredients = mt_rand(1, 3);
         $arrayOfIngredients = fake()->words($numberOfIngredients);
         $activeIngredients = implode(', ', $arrayOfIngredients);
@@ -26,14 +25,14 @@ class MedicineFactory extends Factory
         return [
             'name' => fake()->domainName(),
             'active_ingredients' => $activeIngredients,
-            'dosage_strength' => ,
-            'dosage_unit',
-            'prescription_details' = fake()->,
+            'dosage_strength' => fake()->numberBetween(1, 100),
+            'dosage_unit' => fake()->randomElement(['mg', 'g']),
+            'prescription_info' => fake()->sentence(),
             'presentation' => fake()->randomElement(['capsule', 'pill', 'syrup']),
             'price' => $supplierCost * $profit,
             'quantity_in_stock' => fake()->numberBetween(10, 100),
             'supplier_name' => fake()->company(),
-            'supplier_contact' => fake()->>phoneNumber(),
+            'supplier_contact' => fake()->phoneNumber(),
             'supplier_cost' => $supplierCost,
             'description' => fake()->sentence(),
         ];

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('dosage_strength');
             $table->string('dosage_unit');
             $table->string('prescription_info');
-            $table->enum('presentation', ['Cápsula', 'Tableta', 'Jarabe']);
+            $table->enum('presentation', ['capsule', 'pill', 'syrup']);
             $table->decimal('price', 6, 2);
             $table->unsignedInteger('quantity_in_stock');
             $table->string('supplier_name');

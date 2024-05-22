@@ -22,7 +22,16 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'presentation' => 'required|string',
+            'active_ingredients' => 'required|string',
+            'dosage_strength' => 'required|string',
+            'dosage_unit' => 'required|string',
+            'prescription_info' => 'required|string',
+            'presentation' => 'required|in:capsule|pill|syrup',
+            'price' => 'required|numeric',
+            'quantity_in_stock' => 'required|integer',
+            'supplier_name' => 'required|string',
+            'supplier_contact' => 'required|string',
+            'supplier_cost' => 'required|numeric',
             'description' => 'required|string',
         ]);
 
@@ -44,7 +53,16 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'presentation' => 'required|string',
+            'active_ingredients' => 'required|string',
+            'dosage_strength' => 'required|string',
+            'dosage_unit' => 'required|string',
+            'prescription_info' => 'required|string',
+            'presentation' => 'required|in:capsule|pill|syrup',
+            'price' => 'required|numeric',
+            'quantity_in_stock' => 'required|integer',
+            'supplier_name' => 'required|string',
+            'supplier_contact' => 'required|string',
+            'supplier_cost' => 'required|numeric',
             'description' => 'required|string',
         ]);
 
