@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MedicalCertificate;
 use Illuminate\Http\Request;
-use function Spatie\LaravelPdf\Support\pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 
 class MedicalCertificateController extends Controller
 {
@@ -83,9 +85,7 @@ class MedicalCertificateController extends Controller
      */
     public function generatePdf(MedicalCertificate $medicalCertificate)
     {
-        // Generate a PDF for the medicine
-        return pdf()
-            ->view('pdf.invoice', ['medicalCertificate' => $medicalCertificate])
-            ->name('invoice-2023-04-10.pdf');
+        $pdf = Pdf::loadView('pdf.invoice', ['medicalCertificate' => $medicalCertificate]);
+        return $pdf->stream();
     }
 }
