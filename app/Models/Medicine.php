@@ -14,7 +14,7 @@ class Medicine extends Model
         'active_ingredients',
         'dosage_strength',
         'dosage_unit',
-        'prescription_details',
+        'prescription_info',
         'presentation',
         'price',
         'quantity_in_stock',
