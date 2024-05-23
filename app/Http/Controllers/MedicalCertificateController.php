@@ -85,6 +85,7 @@ class MedicalCertificateController extends Controller
      */
     public function generatePdf(MedicalCertificate $medicalCertificate)
     {
+        $medicalCertificate->load('doctor', 'patient'); // Eager load relationships (doctor and patient
         $pdf = Pdf::loadView('pdf.invoice', ['medicalCertificate' => $medicalCertificate]);
         return $pdf->stream();
     }

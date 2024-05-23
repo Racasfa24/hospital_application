@@ -11,5 +11,6 @@
 <p>Respiratory Rate: {{ $medicalCertificate->respiratory_rate }}</p>
 <p>Doctor ID: {{ $medicalCertificate->doctor_id }}</p>
 <p>Patient ID: {{ $medicalCertificate->patient_id }}</p>
+<p>Patient: {{$medicalCertificate->patient->name}} {{$medicalCertificate->patient->lastname}}</p>
 </body>
 </html>
