@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Patient;
+use App\Models\User;
 
 class PatientTest extends TestCase
 {
@@ -13,20 +14,25 @@ class PatientTest extends TestCase
 
     public function test_patient_can_be_retrieved()
     {
-        $response = $this->getJson('/api/patients');
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->getJson('/api/patients');
 
         $response->assertStatus(200);
     }
 
     public function test_patient_can_be_created()
     {
-        $response = $this->postJson('/api/patients', [
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->postJson('/api/patients', [
             'name' => 'John',
             'lastname' => 'Doe',
             'birth_date' => '2022-01-01',
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
 
         $response->assertStatus(201);
@@ -38,6 +44,7 @@ class PatientTest extends TestCase
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
 
         $this->assertDatabaseHas('patients', [
@@ -47,29 +54,35 @@ class PatientTest extends TestCase
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
     }
 
     public function test_patient_can_be_retrieved_by_id()
     {
+        $user = User::factory()->create();
+
         $patient = Patient::factory()->create();
 
-        $response = $this->getJson("/api/patients/{$patient->id}");
+        $response = $this->actingAs($user)->getJson("/api/patients/{$patient->id}");
 
         $response->assertStatus(200);
     }
 
     public function test_patient_can_be_updated()
     {
+        $user = User::factory()->create();
+
         $patient = Patient::factory()->create();
 
-        $response = $this->putJson("/api/patients/{$patient->id}", [
+        $response = $this->actingAs($user)->putJson("/api/patients/{$patient->id}", [
             'name' => 'Jane',
             'lastname' => 'Doe',
             'birth_date' => '2022-01-01',
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
 
         $response->assertStatus(200);
@@ -81,6 +94,7 @@ class PatientTest extends TestCase
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
 
         $this->assertDatabaseHas('patients', [
@@ -90,14 +104,17 @@ class PatientTest extends TestCase
             'affiliation_date' => '2022-01-01',
             'phone_number' => '123456789',
             'blood_type' => 'A+',
+            'curp' => 'ABC123456DEF789GHI'
         ]);
     }
 
     public function test_patient_can_be_deleted()
     {
+        $user = User::factory()->create();
+
         $patient = Patient::factory()->create();
 
-        $response = $this->deleteJson("/api/patients/{$patient->id}");
+        $response = $this->actingAs($user)->deleteJson("/api/patients/{$patient->id}");
 
         $response->assertStatus(204);
 

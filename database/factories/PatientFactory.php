@@ -23,6 +23,12 @@ class PatientFactory extends Factory
             'affiliation_date' => fake()->date(),
             'phone_number' => fake()->phoneNumber(),
             'blood_type' => fake()->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+            'curp' => $this->generateRandomCurp(),
         ];
+    }
+
+    private function generateRandomCurp(): string
+    {
+        return strtoupper(bin2hex(random_bytes(9)));
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('affiliation_date');
             $table->string('phone_number');
             $table->enum('blood_type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
+            $table->string('curp', 18);
             $table->timestamps();
         });
     }

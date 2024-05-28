@@ -16,6 +16,7 @@ class Patient extends Model
         'affiliation_date',
         'phone_number',
         'blood_type',
+        'curp',
     ];
 
     public function prescriptions()
