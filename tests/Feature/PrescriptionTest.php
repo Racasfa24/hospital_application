@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Medicine;
 use App\Models\Patient;
@@ -17,13 +17,17 @@ class PrescriptionTest extends TestCase
 
     public function test_prescriptions_can_be_retrieved()
     {
-        $response = $this->get('/api/prescriptions');
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/api/prescriptions');
 
         $response->assertStatus(200);
     }
 
     public function test_prescription_can_be_created()
     {
+        $user = User::factory()->create();
+
         $medicineA = Medicine::factory()->create();
         $medicineB = Medicine::factory()->create();
 
@@ -35,7 +39,7 @@ class PrescriptionTest extends TestCase
             'patient_id' => $patient->id,
         ]);
 
-        $response = $this->post('/api/prescriptions', [
+        $response = $this->actingAs($user)->post('/api/prescriptions', [
             'medical_record_id' => $medicalRecord->id,
             'notes' => 'Take the following medicines as prescribed',
             'date' => '2024-04-11',
@@ -96,6 +100,8 @@ class PrescriptionTest extends TestCase
 
     public function test_prescription_can_be_retrieved_by_id()
     {
+        $user = User::factory()->create();
+
         $medicineA = Medicine::factory()->create();
         $medicineB = Medicine::factory()->create();
 
@@ -118,7 +124,7 @@ class PrescriptionTest extends TestCase
             $medicineB->id => ['indications' => 'After meals, 2 times a day, for 3 days'],
         ]);
 
-        $response = $this->get("/api/prescriptions/{$prescription->id}");
+        $response = $this->actingAs($user)->get("/api/prescriptions/{$prescription->id}");
 
         $response->assertStatus(200);
 
@@ -144,9 +150,11 @@ class PrescriptionTest extends TestCase
             ]
         ]);
     }
-    
+
     public function test_prescription_can_be_updated()
     {
+        $user = User::factory()->create();
+
         $medicineA = Medicine::factory()->create();
         $medicineB = Medicine::factory()->create();
 
@@ -169,7 +177,7 @@ class PrescriptionTest extends TestCase
             $medicineB->id => ['indications' => 'After meals, 2 times a day, for 3 days'],
         ]);
 
-        $response = $this->put("/api/prescriptions/{$prescription->id}", [
+        $response = $this->actingAs($user)->put("/api/prescriptions/{$prescription->id}", [
             'medical_record_id' => $medicalRecord->id,
             'notes' => 'Take the following medicines as prescribed, updated',
             'date' => '2024-04-12',
@@ -242,6 +250,8 @@ class PrescriptionTest extends TestCase
 
     public function test_prescription_can_be_deleted()
     {
+        $user = User::factory()->create();
+
         $medicineA = Medicine::factory()->create();
         $medicineB = Medicine::factory()->create();
 
@@ -264,7 +274,7 @@ class PrescriptionTest extends TestCase
             $medicineB->id => ['indications' => 'After meals, 2 times a day, for 3 days'],
         ]);
 
-        $response = $this->delete("/api/prescriptions/{$prescription->id}");
+        $response = $this->actingAs($user)->delete("/api/prescriptions/{$prescription->id}");
 
         $response->assertStatus(204);
 

@@ -12,14 +12,16 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        return Prescription::all();
+        $prescriptions = Prescription::all()->load('medicines');
+
+        return $prescriptions;
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         $validated = $request->validate([
             'medical_record_id' => 'required',
             'notes' => 'required|string',
@@ -36,7 +38,7 @@ class PrescriptionController extends Controller
         ]);
 
         $medicines = collect($validated['medicines'])->mapWithKeys(function ($medicine) {
-            return [ 
+            return [
                 $medicine['medicine_id'] => ['indications' => $medicine['indications']]
             ];
         });
@@ -79,7 +81,7 @@ class PrescriptionController extends Controller
         $prescription->medicines()->detach();
 
         $medicines = collect($validated['medicines'])->mapWithKeys(function ($medicine) {
-            return [ 
+            return [
                 $medicine['medicine_id'] => ['indications' => $medicine['indications']]
             ];
         });
