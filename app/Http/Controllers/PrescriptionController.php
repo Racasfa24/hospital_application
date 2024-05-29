@@ -12,9 +12,7 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        $prescriptions = Prescription::all()->load('medicines');
-
-        return $prescriptions;
+        return Prescription::all();
     }
 
     /**

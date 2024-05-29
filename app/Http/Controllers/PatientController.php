@@ -53,7 +53,7 @@ class PatientController extends Controller
             'affiliation_date' => 'required|date_format:Y-m-d,after:birth_date',
             'phone_number' => 'required|string|unique:patients,phone_number,' . $patient->id,
             'blood_type' => 'required|string|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
-            'curp' => 'required|string|size:18|regex:/^[A-Z0-9]{18}$/|unique:patients,curp,' . $patient->curp,
+            'curp' => 'required|string|size:18|regex:/^[A-Z0-9]{18}$/|unique:patients,curp,' . $patient->id,
         ]);
 
         $patient->update($validated);
